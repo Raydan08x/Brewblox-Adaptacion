@@ -4,7 +4,7 @@ FROM node:20-alpine AS build-stage
 WORKDIR /app
 
 # Install dependencies (using cache)
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock .yarnrc.yml ./
 RUN corepack enable && yarn install
 
 # Copy source and build
