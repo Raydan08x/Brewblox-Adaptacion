@@ -1,0 +1,35 @@
+name: Remote Deploy
+
+on:
+  workflow_run:
+    workflows: ["CI build"]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Raspberry Pi
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PI_HOST }}
+          username: ${{ secrets.PI_USER }}
+          password: ${{ secrets.PI_PASSWORD }}
+          port: ${{ secrets.PI_PORT }}
+          script: |
+            mkdir -p /home/${{ secrets.PI_USER }}/brewblox-ui
+            cd /home/${{ secrets.PI_USER }}/brewblox-ui
+            # We assume the code is already built or we use the image from GHCR
+            # For simplicity, we'll pull the latest changes and run docker compose
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/Raydan08x/Brewblox-Adaptacion.git .
+            else
+              git pull origin main
+            fi
+            docker compose -f docker-compose.pi.yml up -d --pull always

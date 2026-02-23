@@ -18,9 +18,9 @@ def zip_project(zip_name):
                         zipf.write(file_path, file_path)
 
 def deploy():
-    host = "192.168.1.15"
-    user = "sdpi"
-    password = "199611cm"
+    host = os.getenv("PI_HOST", "192.168.1.15")
+    user = os.getenv("PI_USER", "sdpi")
+    password = os.getenv("PI_PASSWORD", "199611cm")
     remote_path = "/home/sdpi/brewblox-ui"
     zip_name = "project_prod.zip"
 

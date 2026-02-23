@@ -2,8 +2,8 @@
   "name": "brewblox-ui",
   "version": "0.1.0",
   "description": "UI for the Brewblox brewing controller",
-  "author": "Elco Jacobs / BrewPi B.V.",
-  "repository": "https://github.com/BrewBlox/brewblox-ui",
+  "author": "Raydan08x",
+  "repository": "https://github.com/Raydan08x/Brewblox-Adaptacion",
   "license": "GPL-3.0",
   "scripts": {
     "ci": "yarn install --immutable",
