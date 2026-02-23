@@ -33,22 +33,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: |
-          corepack enable
-          yarn --version
-      - run: yarn install
-      - run: yarn build
-      - run: yarn build
-        env:
-          NODE_OPTIONS: --max_old_space_size=4096
-      # - run: yarn lint
-      # - run: yarn test:ci
-
       - name: Build Docker image
         uses: docker/build-push-action@v4
         with:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
+          platforms: linux/amd64,linux/arm64
           context: .
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
