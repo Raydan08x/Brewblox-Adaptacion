@@ -1,16 +1,14 @@
-# Exclude everything by default
-*
-# Allow necessary build files
-!package.json
-!yarn.lock
-!tsconfig.json
-!tsconfig.node.json
-!vite.config.mts
-!src/
-!public/
-!dev/
-!Dockerfile
-!docker-compose.pi.yml
-!dist/
-!.yarnrc.yml
-!index.html
+node_modules
+dist
+.git
+.vscode
+.github
+*.log
+logs.zip
+logs_failed.zip
+logs_failed_2.zip
+run_logs
+run_logs_failed
+run_logs_failed_2
+project.zip
+project_prod.zip
