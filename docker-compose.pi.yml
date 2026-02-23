@@ -2,7 +2,7 @@ name: brewblox-ui-pi-direct
 
 services:
   ui:
-    build: .
+    image: ghcr.io/raydan08x/brewblox-ui:develop
     ports:
       - '8085:80'
     restart: unless-stopped
