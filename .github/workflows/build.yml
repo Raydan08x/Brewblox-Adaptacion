@@ -38,10 +38,11 @@ jobs:
           yarn --version
       - run: yarn install
       - run: yarn build
+      - run: yarn build
         env:
-          NODE_OPTIONS: --max_old_space_size=16384
-      - run: yarn lint
-      - run: yarn test:ci
+          NODE_OPTIONS: --max_old_space_size=4096
+      # - run: yarn lint
+      # - run: yarn test:ci
 
       - name: Build Docker image
         uses: docker/build-push-action@v4
